@@ -1,368 +1,331 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HYPER RESELLZ</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-body{background:#0a0a0f;color:white;overflow-x:hidden;}
-
-/* TOP SHIPPING BAR */
-.top-bar{
-background:#ff0033;
-text-align:center;
-padding:6px;
-font-size:12px;
-font-weight:600;
-letter-spacing:1px;
+body{
+  margin:0;
+  background:#0a0a0a;
+  color:white;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-/* GLITCH LOGO */
+.top-banner{
+  background:red;
+  text-align:center;
+  padding:6px;
+  font-weight:bold;
+  font-size:14px;
+}
+
+header{
+  text-align:center;
+  padding:20px;
+}
+
 .logo{
-font-weight:900;
-font-size:24px;
-letter-spacing:4px;
-position:relative;
-display:inline-block;
-animation:glitch 2s infinite;
+  font-size:40px;
+  font-weight:900;
+  position:relative;
+  animation:glitch 1s infinite;
 }
-.logo::before,.logo::after{
-content:"HYPER RESELLZ";
-position:absolute;
-left:0;top:0;
-}
-.logo::before{color:#ff0033;animation:glitchTop 2s infinite;}
-.logo::after{color:#00f0ff;animation:glitchBottom 2s infinite;}
 
 @keyframes glitch{
-0%,100%{transform:none;}
-20%{transform:skew(-2deg);}
-40%{transform:skew(2deg);}
-60%{transform:translateX(-2px);}
-80%{transform:translateX(2px);}
-}
-@keyframes glitchTop{
-0%{clip-path:inset(0 0 80% 0);}
-50%{clip-path:inset(0 0 60% 0);}
-100%{clip-path:inset(0 0 80% 0);}
-}
-@keyframes glitchBottom{
-0%{clip-path:inset(80% 0 0 0);}
-50%{clip-path:inset(60% 0 0 0);}
-100%{clip-path:inset(80% 0 0 0);}
+  0%{text-shadow:2px 2px red;}
+  25%{text-shadow:-2px -2px lime;}
+  50%{text-shadow:2px -2px cyan;}
+  75%{text-shadow:-2px 2px magenta;}
+  100%{text-shadow:2px 2px red;}
 }
 
-/* HEADER */
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 6%;
-border-bottom:1px solid #222;
-position:sticky;
-top:0;
-background:#0a0a0f;
-z-index:1000;
-}
-
-.cart-icon{cursor:pointer;position:relative;}
-.cart-count{
-position:absolute;
-top:-8px;right:-8px;
-background:#ff0033;
-padding:4px 8px;
-border-radius:50%;
-font-size:12px;
-}
-
-/* CATEGORY */
 .categories{
-display:flex;flex-wrap:wrap;
-gap:10px;padding:20px 6%;
-}
-.categories button{
-background:#111;border:1px solid #222;
-color:white;padding:8px 14px;
-border-radius:20px;cursor:pointer;
-font-size:13px;transition:.2s;
-}
-.categories button.active{
-background:#ff0033;border:none;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:20px;
 }
 
-/* PRODUCTS */
-.products{
-padding:30px 6%;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
+.categories button{
+  background:#111;
+  color:white;
+  border:1px solid #333;
+  padding:8px 14px;
+  cursor:pointer;
+}
+
+.categories button:hover{
+  border-color:red;
+}
+
+#products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:20px;
 }
 
 .card{
-background:#111;border:1px solid #222;
-border-radius:18px;padding:18px;
-transition:.3s;
-}
-.card:hover{transform:translateY(-5px);border-color:#333;}
-
-.card button:active{
-transform:scale(.92);
-box-shadow:0 0 15px #ff0033;
+  background:#111;
+  padding:15px;
+  border:1px solid #222;
+  transition:0.2s;
 }
 
-.price{margin:6px 0;font-weight:600;}
-.stock{font-size:12px;margin-bottom:8px;}
-.low{color:#ff0033;font-weight:700;}
-
-.qty{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
-.qty button{
-width:26px;height:26px;
-border:none;background:#222;
-color:white;border-radius:6px;
-cursor:pointer;
+.card:hover{
+  transform:scale(1.03);
+  border-color:red;
 }
 
-.add-btn{
-width:100%;padding:8px;
-border:none;background:white;
-color:black;border-radius:20px;
-font-weight:700;cursor:pointer;
-transition:.2s;
+.size-container, .color-container{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin:8px 0;
 }
-.add-btn:hover{opacity:.85;}
 
-/* CART */
+.size-btn, .color-btn{
+  padding:5px 10px;
+  background:#000;
+  border:1px solid #333;
+  color:white;
+  cursor:pointer;
+}
+
+.size-btn.active, .color-btn.active{
+  background:red;
+  border-color:red;
+}
+
+.size-btn.disabled{
+  opacity:0.3;
+  cursor:not-allowed;
+}
+
+.stock-warning{
+  color:red;
+  font-size:12px;
+}
+
 .cart{
-position:fixed;right:-400px;top:0;
-width:350px;height:100%;
-background:#111;padding:20px;
-transition:.4s;overflow-y:auto;
-border-left:1px solid #222;z-index:2000;
+  position:fixed;
+  right:0;
+  top:0;
+  width:300px;
+  height:100%;
+  background:#111;
+  padding:15px;
+  overflow:auto;
+  border-left:2px solid red;
 }
-.cart.active{right:0;}
 
 .cart-item{
-display:flex;justify-content:space-between;
-font-size:13px;margin-bottom:10px;
-}
-.remove-btn{
-background:none;border:none;
-color:#ff0033;cursor:pointer;
-font-size:12px;
-}
-.total-line{
-display:flex;justify-content:space-between;
-margin-top:8px;font-size:13px;
-}
-.total{margin-top:15px;font-weight:700;}
-
-.checkout{
-margin-top:15px;width:100%;
-padding:10px;border:none;
-background:#ff0033;color:white;
-border-radius:20px;font-weight:700;
-cursor:pointer;
+  border-bottom:1px solid #333;
+  margin-bottom:10px;
+  padding-bottom:10px;
 }
 
-/* POPUP */
-.overlay{
-position:fixed;width:100%;height:100%;
-background:rgba(0,0,0,.7);
-display:none;z-index:2500;
-}
-.popup{
-position:fixed;top:50%;left:50%;
-transform:translate(-50%,-50%);
-background:#15151c;padding:25px;
-border-radius:18px;border:1px solid #333;
-display:none;text-align:center;
-z-index:3000;
-}
-.popup.active,.overlay.active{display:block;}
-
-.sold-alert{
-position:fixed;bottom:20px;left:20px;
-background:#15151c;padding:12px 18px;
-border-radius:12px;border:1px solid #333;
-font-size:13px;display:none;
+.cart button{
+  background:red;
+  border:none;
+  color:white;
+  padding:6px 10px;
+  cursor:pointer;
+  margin-top:5px;
 }
 </style>
 </head>
+
 <body>
 
-<div class="top-bar">SHIPPING US & CANADA</div>
+<div class="top-banner">🚚 SHIPPING US AND CANADA</div>
 
 <header>
-<div class="logo">HYPER RESELLZ</div>
-<div class="cart-icon" onclick="toggleCart()">🛒
-<div class="cart-count" id="cartCount">0</div>
-</div>
+  <div class="logo">HYPER RESELLZ</div>
 </header>
 
-<div class="categories" id="categoryTabs"></div>
-<section class="products" id="products"></section>
+<div class="categories" id="categories"></div>
 
-<div class="cart" id="cart">
-<h2>Your Cart</h2>
-<div id="cartItems"></div>
+<div id="products"></div>
 
-<div class="total-line"><span>Subtotal</span><span id="subtotal">$0</span></div>
-<div class="total-line"><span>Shipping (5%)</span><span id="shipping">$0</span></div>
-<div class="total total-line"><span>Total</span><span id="grandTotal">$0</span></div>
-
-<button class="checkout" onclick="checkout()">CHECKOUT</button>
+<div class="cart">
+  <h3>Cart</h3>
+  <div id="cartItems"></div>
+  <p id="total"></p>
+  <button onclick="checkout()">Checkout</button>
 </div>
-
-<div class="overlay" id="overlay" onclick="closePopup()"></div>
-<div class="popup" id="popup">
-<h2>Payment Instructions</h2>
-<p id="paymentText"></p><br>
-<button onclick="closePopup()">Close</button>
-</div>
-
-<div class="sold-alert" id="soldAlert"></div>
 
 <script>
 
 let products=[
-{cat:"Tech",name:"PS5",price:300,stock:3},
-{cat:"Hoodies",name:"AUTHENTIC Bape Hoodie",price:55,stock:7},
-{cat:"Coats",name:"LEGIT Moncler Coat",price:210,stock:5},
-{cat:"Accessories",name:"Labubu Plush",price:65,stock:8}
+
+{
+  cat:"Hoodies",
+  name:"Bape Shark Hoodie",
+  price:240,
+  colors:["Black","Pink","Camo"],
+  stock:{S:3,M:2,L:1,XL:0}
+},
+
+{
+  cat:"Tech",
+  name:"PS5",
+  price:650,
+  stock:3
+}
+
 ];
 
-let cart=JSON.parse(localStorage.getItem("cart"))||[];
-let quantities={};
+let cart=[];
 
-function init(){
-let categories=[...new Set(products.map(p=>p.cat))];
-let tabs=document.getElementById("categoryTabs");
-categories.forEach((c,i)=>{
-tabs.innerHTML+=`<button onclick="filterCategory('${c}')" ${i===0?'class="active"':''}>${c}</button>`;
-});
-filterCategory(categories[0]);
-updateCart();
+function generateCategories(){
+  let cats=[...new Set(products.map(p=>p.cat))];
+  let container=document.getElementById("categories");
+  container.innerHTML="";
+  cats.forEach(c=>{
+    let btn=document.createElement("button");
+    btn.innerText=c;
+    btn.onclick=()=>filterCategory(c);
+    container.appendChild(btn);
+  });
 }
 
 function filterCategory(cat){
-document.querySelectorAll(".categories button").forEach(btn=>btn.classList.remove("active"));
-[...document.querySelectorAll(".categories button")].find(b=>b.innerText===cat).classList.add("active");
-renderProducts(products.filter(p=>p.cat===cat));
+  renderProducts(products.filter(p=>p.cat===cat));
 }
 
 function renderProducts(list){
-let container=document.getElementById("products");
-container.innerHTML="";
-list.forEach(p=>{
-quantities[p.name]=1;
-container.innerHTML+=`
-<div class="card">
-<h3>${p.name}</h3>
-<div class="price">$${p.price}</div>
-<div class="stock" id="stock-${p.name}">${p.stock} LEFT</div>
-<div class="qty">
-<button onclick="changeQty('${p.name}',-1)">-</button>
-<span id="qty-${p.name}">1</span>
-<button onclick="changeQty('${p.name}',1)">+</button>
-</div>
-<button class="add-btn" onclick="addToCart('${p.name}')">ADD</button>
-</div>`;
-});
+  let container=document.getElementById("products");
+  container.innerHTML="";
+
+  list.forEach(product=>{
+
+    let sizeHTML="";
+    let colorHTML="";
+
+    if(typeof product.stock==="object"){
+      sizeHTML=`
+      <div class="size-container">
+      ${Object.keys(product.stock).map(size=>{
+        let qty=product.stock[size];
+        let disabled=qty===0?"disabled":"";
+        return `<button class="size-btn ${disabled}" data-size="${size}" data-stock="${qty}" onclick="selectSize(this)">${size}</button>`;
+      }).join("")}
+      </div>
+      <div class="stock-warning"></div>
+      `;
+    }
+
+    if(product.colors){
+      colorHTML=`
+      <div class="color-container">
+      ${product.colors.map(color=>
+        `<button class="color-btn" data-color="${color}" onclick="selectColor(this)">${color}</button>`
+      ).join("")}
+      </div>`;
+    }
+
+    container.innerHTML+=`
+      <div class="card">
+        <h3>${product.name}</h3>
+        <p>$${product.price}</p>
+        ${sizeHTML}
+        ${colorHTML}
+        <button onclick="addToCart('${product.name}', ${product.price}, this)">Add To Cart</button>
+      </div>
+    `;
+  });
 }
 
-function changeQty(name,val){
-quantities[name]+=val;
-if(quantities[name]<1)quantities[name]=1;
-document.getElementById("qty-"+name).innerText=quantities[name];
+function selectSize(btn){
+  if(btn.classList.contains("disabled")) return;
+
+  let card=btn.closest(".card");
+  card.querySelectorAll(".size-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+
+  let stock=btn.dataset.stock;
+  let warning=card.querySelector(".stock-warning");
+  if(stock<=2){
+    warning.innerText="ONLY "+stock+" LEFT ⚠";
+  } else{
+    warning.innerText="";
+  }
 }
 
-function addToCart(name){
-let product=products.find(p=>p.name===name);
-cart.push({name:name,price:product.price,qty:quantities[name]});
-localStorage.setItem("cart",JSON.stringify(cart));
-updateCart();
+function selectColor(btn){
+  let card=btn.closest(".card");
+  card.querySelectorAll(".color-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
 }
 
-function removeItem(index){
-cart.splice(index,1);
-localStorage.setItem("cart",JSON.stringify(cart));
-updateCart();
+function addToCart(name,price,button){
+  let card=button.closest(".card");
+  let size=card.querySelector(".size-btn.active");
+  let color=card.querySelector(".color-btn.active");
+
+  cart.push({
+    name:name,
+    price:price,
+    size:size?size.dataset.size:null,
+    color:color?color.dataset.color:null
+  });
+
+  updateCart();
 }
 
 function updateCart(){
-let items=document.getElementById("cartItems");
-items.innerHTML="";
-let subtotal=0,count=0;
+  let container=document.getElementById("cartItems");
+  container.innerHTML="";
+  let subtotal=0;
 
-cart.forEach((item,i)=>{
-subtotal+=item.price*item.qty;
-count+=item.qty;
-items.innerHTML+=`
-<div class="cart-item">
-<span>${item.name} x${item.qty}</span>
-<span>
-$${item.price*item.qty}
-<button class="remove-btn" onclick="removeItem(${i})">remove</button>
-</span>
-</div>`;
-});
+  cart.forEach((item,index)=>{
+    subtotal+=item.price;
 
-let shipping=(subtotal*0.05).toFixed(2);
-let total=(subtotal+parseFloat(shipping)).toFixed(2);
+    container.innerHTML+=`
+    <div class="cart-item">
+      <p>${item.name}</p>
+      <p>${item.size?("Size: "+item.size):""}</p>
+      <p>${item.color?("Color: "+item.color):""}</p>
+      <p>$${item.price}</p>
+      <button onclick="removeItem(${index})">Remove</button>
+    </div>
+    `;
+  });
 
-document.getElementById("subtotal").innerText="$"+subtotal.toFixed(2);
-document.getElementById("shipping").innerText="$"+shipping;
-document.getElementById("grandTotal").innerText="$"+total;
-document.getElementById("cartCount").innerText=count;
+  let shipping=subtotal*0.05;
+  let total=subtotal+shipping;
+
+  document.getElementById("total").innerText=
+    "Subtotal: $"+subtotal.toFixed(2)+
+    " | Shipping (5%): $"+shipping.toFixed(2)+
+    " | Total: $"+total.toFixed(2);
 }
 
-function toggleCart(){
-document.getElementById("cart").classList.toggle("active");
+function removeItem(index){
+  cart.splice(index,1);
+  updateCart();
 }
 
 function checkout(){
-let subtotal=cart.reduce((sum,i)=>sum+i.price*i.qty,0);
-if(subtotal===0)return alert("Cart empty");
-let shipping=(subtotal*0.05);
-let total=(subtotal+shipping).toFixed(2);
-document.getElementById("paymentText").innerText=
-"Send $"+total+" to your@email.com via PayPal.\nIncludes 5% shipping fee.";
-document.getElementById("overlay").classList.add("active");
-document.getElementById("popup").classList.add("active");
+  if(cart.length===0){
+    alert("Cart is empty");
+    return;
+  }
+
+  let subtotal=cart.reduce((sum,item)=>sum+item.price,0);
+  let total=subtotal*1.05;
+
+  alert("Send $"+total.toFixed(2)+" to yourpaypal@email.com via PayPal");
 }
 
-function closePopup(){
-document.getElementById("overlay").classList.remove("active");
-document.getElementById("popup").classList.remove("active");
-}
-
-/* Fake stock fluctuation */
-setInterval(()=>{
-products.forEach(p=>{
-let change=Math.floor(Math.random()*3)-1;
-p.stock=Math.max(1,p.stock+change);
-let el=document.getElementById("stock-"+p.name);
-if(el){
-el.innerText=p.stock+" LEFT";
-if(p.stock<4) el.classList.add("low");
-else el.classList.remove("low");
-}
-});
-},5000);
-
-/* Just sold popup */
-setInterval(()=>{
-let random=products[Math.floor(Math.random()*products.length)];
-let alertBox=document.getElementById("soldAlert");
-alertBox.innerText=random.name+" just sold!";
-alertBox.style.display="block";
-setTimeout(()=>alertBox.style.display="none",3000);
-},8000);
-
-init();
+generateCategories();
+renderProducts(products);
 
 </script>
+
 </body>
 </html>
