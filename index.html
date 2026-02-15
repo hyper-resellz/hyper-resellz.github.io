@@ -9,38 +9,39 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
 body{background:#0a0a0f;color:white;overflow-x:hidden;}
 
+/* TOP SHIPPING BAR */
+.top-bar{
+background:#ff0033;
+text-align:center;
+padding:6px;
+font-size:12px;
+font-weight:600;
+letter-spacing:1px;
+}
+
 /* GLITCH LOGO */
 .logo{
 font-weight:900;
-font-size:26px;
+font-size:24px;
 letter-spacing:4px;
 position:relative;
 display:inline-block;
 animation:glitch 2s infinite;
 }
-.logo::before,
-.logo::after{
+.logo::before,.logo::after{
 content:"HYPER RESELLZ";
 position:absolute;
-left:0;
-top:0;
+left:0;top:0;
 }
-.logo::before{
-color:#ff0033;
-animation:glitchTop 2s infinite;
-}
-.logo::after{
-color:#00f0ff;
-animation:glitchBottom 2s infinite;
-}
+.logo::before{color:#ff0033;animation:glitchTop 2s infinite;}
+.logo::after{color:#00f0ff;animation:glitchBottom 2s infinite;}
 
 @keyframes glitch{
-0%{transform:none;}
+0%,100%{transform:none;}
 20%{transform:skew(-2deg);}
 40%{transform:skew(2deg);}
 60%{transform:translateX(-2px);}
 80%{transform:translateX(2px);}
-100%{transform:none;}
 }
 @keyframes glitchTop{
 0%{clip-path:inset(0 0 80% 0);}
@@ -58,7 +59,7 @@ header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 6%;
+padding:18px 6%;
 border-bottom:1px solid #222;
 position:sticky;
 top:0;
@@ -66,61 +67,52 @@ background:#0a0a0f;
 z-index:1000;
 }
 
-.cart-icon{
-cursor:pointer;
-position:relative;
-}
+.cart-icon{cursor:pointer;position:relative;}
 .cart-count{
 position:absolute;
-top:-8px;
-right:-8px;
+top:-8px;right:-8px;
 background:#ff0033;
 padding:4px 8px;
 border-radius:50%;
 font-size:12px;
 }
 
-/* CATEGORY TABS */
+/* CATEGORY */
 .categories{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-padding:20px 6%;
+display:flex;flex-wrap:wrap;
+gap:10px;padding:20px 6%;
 }
 .categories button{
-background:#111;
-border:1px solid #222;
-color:white;
-padding:8px 14px;
-border-radius:20px;
-cursor:pointer;
-font-size:13px;
+background:#111;border:1px solid #222;
+color:white;padding:8px 14px;
+border-radius:20px;cursor:pointer;
+font-size:13px;transition:.2s;
 }
 .categories button.active{
-background:#ff0033;
-border:none;
+background:#ff0033;border:none;
 }
 
 /* PRODUCTS */
 .products{
-padding:40px 6%;
+padding:30px 6%;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:30px;
 }
 
 .card{
-background:#111;
-border:1px solid #222;
-border-radius:18px;
-padding:18px;
+background:#111;border:1px solid #222;
+border-radius:18px;padding:18px;
 transition:.3s;
-position:relative;
 }
 .card:hover{transform:translateY(-5px);border-color:#333;}
 
-.price{margin:6px 0;font-weight:600;}
+.card button:active{
+transform:scale(.92);
+box-shadow:0 0 15px #ff0033;
+}
 
+.price{margin:6px 0;font-weight:600;}
 .stock{font-size:12px;margin-bottom:8px;}
 .low{color:#ff0033;font-weight:700;}
 
@@ -133,92 +125,74 @@ cursor:pointer;
 }
 
 .add-btn{
-width:100%;
-padding:8px;
-border:none;
-background:white;
-color:black;
-border-radius:20px;
-font-weight:700;
-cursor:pointer;
+width:100%;padding:8px;
+border:none;background:white;
+color:black;border-radius:20px;
+font-weight:700;cursor:pointer;
+transition:.2s;
 }
+.add-btn:hover{opacity:.85;}
 
 /* CART */
 .cart{
-position:fixed;
-right:-400px;
-top:0;
-width:350px;
-height:100%;
-background:#111;
-padding:20px;
-transition:.4s;
-overflow-y:auto;
-border-left:1px solid #222;
-z-index:2000;
+position:fixed;right:-400px;top:0;
+width:350px;height:100%;
+background:#111;padding:20px;
+transition:.4s;overflow-y:auto;
+border-left:1px solid #222;z-index:2000;
 }
 .cart.active{right:0;}
 
 .cart-item{
-display:flex;
-justify-content:space-between;
-font-size:13px;
-margin-bottom:10px;
+display:flex;justify-content:space-between;
+font-size:13px;margin-bottom:10px;
+}
+.remove-btn{
+background:none;border:none;
+color:#ff0033;cursor:pointer;
+font-size:12px;
+}
+.total-line{
+display:flex;justify-content:space-between;
+margin-top:8px;font-size:13px;
 }
 .total{margin-top:15px;font-weight:700;}
 
 .checkout{
-margin-top:15px;
-width:100%;
-padding:10px;
-border:none;
-background:#ff0033;
-color:white;
-border-radius:20px;
-font-weight:700;
+margin-top:15px;width:100%;
+padding:10px;border:none;
+background:#ff0033;color:white;
+border-radius:20px;font-weight:700;
 cursor:pointer;
 }
 
 /* POPUP */
 .overlay{
-position:fixed;
-width:100%;
-height:100%;
+position:fixed;width:100%;height:100%;
 background:rgba(0,0,0,.7);
-display:none;
-z-index:2500;
+display:none;z-index:2500;
 }
 .popup{
-position:fixed;
-top:50%;
-left:50%;
+position:fixed;top:50%;left:50%;
 transform:translate(-50%,-50%);
-background:#15151c;
-padding:25px;
-border-radius:18px;
-border:1px solid #333;
-display:none;
-text-align:center;
+background:#15151c;padding:25px;
+border-radius:18px;border:1px solid #333;
+display:none;text-align:center;
 z-index:3000;
 }
 .popup.active,.overlay.active{display:block;}
 
-/* SOLD NOTIFICATION */
 .sold-alert{
-position:fixed;
-bottom:20px;
-left:20px;
-background:#15151c;
-padding:12px 18px;
-border-radius:12px;
-border:1px solid #333;
-font-size:13px;
-display:none;
+position:fixed;bottom:20px;left:20px;
+background:#15151c;padding:12px 18px;
+border-radius:12px;border:1px solid #333;
+font-size:13px;display:none;
 }
-
 </style>
 </head>
 <body>
+
+<div class="top-bar">SHIPPING US & CANADA</div>
 
 <header>
 <div class="logo">HYPER RESELLZ</div>
@@ -233,7 +207,11 @@ display:none;
 <div class="cart" id="cart">
 <h2>Your Cart</h2>
 <div id="cartItems"></div>
-<div class="total" id="cartTotal">Total: $0</div>
+
+<div class="total-line"><span>Subtotal</span><span id="subtotal">$0</span></div>
+<div class="total-line"><span>Shipping (5%)</span><span id="shipping">$0</span></div>
+<div class="total total-line"><span>Total</span><span id="grandTotal">$0</span></div>
+
 <button class="checkout" onclick="checkout()">CHECKOUT</button>
 </div>
 
@@ -249,14 +227,10 @@ display:none;
 <script>
 
 let products=[
-{cat:"Coats",name:"Moncler Coat",price:480,stock:6},
-{cat:"Hoodies",name:"Bape Hoodie",price:240,stock:8},
-{cat:"Pants",name:"Purple Jeans",price:260,stock:5},
-{cat:"Glasses",name:"Meta Glasses",price:350,stock:4},
-{cat:"Colognes",name:"Dior Sauvage",price:140,stock:9},
-{cat:"Accessories",name:"Labubu Figure",price:120,stock:7},
-{cat:"Tech",name:"PS5",price:650,stock:3},
-{cat:"Backpacks",name:"Sprayground Backpack",price:180,stock:6}
+{cat:"Tech",name:"PS5",price:300,stock:3},
+{cat:"Hoodies",name:"AUTHENTIC Bape Hoodie",price:55,stock:7},
+{cat:"Coats",name:"LEGIT Moncler Coat",price:210,stock:5},
+{cat:"Accessories",name:"Labubu Plush",price:65,stock:8}
 ];
 
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
@@ -265,7 +239,6 @@ let quantities={};
 function init(){
 let categories=[...new Set(products.map(p=>p.cat))];
 let tabs=document.getElementById("categoryTabs");
-tabs.innerHTML="";
 categories.forEach((c,i)=>{
 tabs.innerHTML+=`<button onclick="filterCategory('${c}')" ${i===0?'class="active"':''}>${c}</button>`;
 });
@@ -288,9 +261,7 @@ container.innerHTML+=`
 <div class="card">
 <h3>${p.name}</h3>
 <div class="price">$${p.price}</div>
-<div class="stock" id="stock-${p.name}">
-${p.stock} LEFT
-</div>
+<div class="stock" id="stock-${p.name}">${p.stock} LEFT</div>
 <div class="qty">
 <button onclick="changeQty('${p.name}',-1)">-</button>
 <span id="qty-${p.name}">1</span>
@@ -314,20 +285,36 @@ localStorage.setItem("cart",JSON.stringify(cart));
 updateCart();
 }
 
+function removeItem(index){
+cart.splice(index,1);
+localStorage.setItem("cart",JSON.stringify(cart));
+updateCart();
+}
+
 function updateCart(){
 let items=document.getElementById("cartItems");
 items.innerHTML="";
-let total=0,count=0;
-cart.forEach(item=>{
-total+=item.price*item.qty;
+let subtotal=0,count=0;
+
+cart.forEach((item,i)=>{
+subtotal+=item.price*item.qty;
 count+=item.qty;
 items.innerHTML+=`
 <div class="cart-item">
 <span>${item.name} x${item.qty}</span>
-<span>$${item.price*item.qty}</span>
+<span>
+$${item.price*item.qty}
+<button class="remove-btn" onclick="removeItem(${i})">remove</button>
+</span>
 </div>`;
 });
-document.getElementById("cartTotal").innerText="Total: $"+total;
+
+let shipping=(subtotal*0.05).toFixed(2);
+let total=(subtotal+parseFloat(shipping)).toFixed(2);
+
+document.getElementById("subtotal").innerText="$"+subtotal.toFixed(2);
+document.getElementById("shipping").innerText="$"+shipping;
+document.getElementById("grandTotal").innerText="$"+total;
 document.getElementById("cartCount").innerText=count;
 }
 
@@ -336,10 +323,12 @@ document.getElementById("cart").classList.toggle("active");
 }
 
 function checkout(){
-let total=cart.reduce((sum,i)=>sum+i.price*i.qty,0);
-if(total===0)return alert("Cart empty");
+let subtotal=cart.reduce((sum,i)=>sum+i.price*i.qty,0);
+if(subtotal===0)return alert("Cart empty");
+let shipping=(subtotal*0.05);
+let total=(subtotal+shipping).toFixed(2);
 document.getElementById("paymentText").innerText=
-"Send $"+total+" to your@email.com via PayPal.";
+"Send $"+total+" to your@email.com via PayPal.\nIncludes 5% shipping fee.";
 document.getElementById("overlay").classList.add("active");
 document.getElementById("popup").classList.add("active");
 }
@@ -349,7 +338,7 @@ document.getElementById("overlay").classList.remove("active");
 document.getElementById("popup").classList.remove("active");
 }
 
-/* STOCK FLUCTUATION */
+/* Fake stock fluctuation */
 setInterval(()=>{
 products.forEach(p=>{
 let change=Math.floor(Math.random()*3)-1;
@@ -363,6 +352,7 @@ else el.classList.remove("low");
 });
 },5000);
 
+/* Just sold popup */
 setInterval(()=>{
 let random=products[Math.floor(Math.random()*products.length)];
 let alertBox=document.getElementById("soldAlert");
@@ -374,6 +364,5 @@ setTimeout(()=>alertBox.style.display="none",3000);
 init();
 
 </script>
-
 </body>
 </html>
