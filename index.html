@@ -502,6 +502,7 @@
 
         let sizeDropdown = "";
         let colorDropdown = "";
+        let variantDropdown = "";
 
         if (p.sizes) {
           sizeDropdown = `
@@ -520,6 +521,15 @@
             </select>
           `;
         }
+        
+        if (p.variants) {
+          variantDropdown = `
+            <select id="color-${p.name}">
+              <option value="">Select Variant</option>
+              ${p.variants.map(c => `<option value="${c}">${c}</option>`).join("")}
+            </select>
+          `;
+        }
 
         container.innerHTML += `
           <div class="card">
@@ -531,6 +541,7 @@
 
             ${sizeDropdown}
             ${colorDropdown}
+            ${variantDropdown}
 
             <div class="qty">
               <button onclick="changeQty('${p.name}', -1)">-</button>
@@ -558,19 +569,23 @@
 
       let sizeEl = document.getElementById("size-" + name);
       let colorEl = document.getElementById("color-" + name);
+      let variantEl = document.getElementById("variant-" + name);
 
       let size = sizeEl ? sizeEl.value : null;
       let color = colorEl ? colorEl.value : null;
+      let variant = variantEl ? variantEl.value : null;
 
       if (sizeEl && !size) return alert("Select size");
       if (colorEl && !color) return alert("Select color");
+      if (variantEl && !variant) return alert("Select variant");
 
       cart.push({
         name: name,
         price: product.price,
         qty: qty,
         size: size,
-        color: color
+        color: color,
+        variant: variant
       });
 
       localStorage.setItem("cart", JSON.stringify(cart));
@@ -600,6 +615,7 @@
               ${item.name} x${item.qty}
               ${item.size ? `<br>Size: ${item.size}` : ""}
               ${item.color ? `<br>Color: ${item.color}` : ""}
+              ${item.variant ? `<br>Variant: ${item.variant}` : ""}
             </span>
             <span>
               $${item.price * item.qty}
