@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="black"/>
+  
+  <!-- Glitch shadow -->
+  <text x="50%" y="50%" 
+        font-family="Arial Black, Impact, sans-serif" 
+        font-size="38" 
+        text-anchor="middle" 
+        dominant-baseline="middle" 
+        fill="#ff0033"
+        dx="2" dy="2">
+    HR
+  </text>
+
+  <!-- Main text -->
+  <text x="50%" y="50%" 
+        font-family="Arial Black, Impact, sans-serif" 
+        font-size="38" 
+        text-anchor="middle" 
+        dominant-baseline="middle" 
+        fill="white">
+    HR
+  </text>
+</svg>
