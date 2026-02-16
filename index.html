@@ -663,7 +663,7 @@
           "9Pm Pour Femme",
           "9PM Night Out"
           ]
-      },
+      }
       {
         
         ]
@@ -733,7 +733,7 @@
         
         if (p.variants) {
           variantDropdown = `
-            <select id="color-${p.name}">
+            <select id="variant-${p.name}">
               <option value="">Select Variant</option>
               ${p.variants.map(c => `<option value="${c}">${c}</option>`).join("")}
             </select>
