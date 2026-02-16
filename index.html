@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+]\<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -270,16 +271,20 @@ background-repeat:no-repeat;
 <script>
 
 let products=[
-{cat:"Tech",name:"PS5",price:650,stock:3},
-{cat:"Hoodies",name:"Bape Hoodie",price:240,stock:7,
+{cat:"Tech",name:"PS5 (825GB)",price:300,stock:3,
+  variants:["PS5 Slim (Disc Only)","PS5 Pro (2TB)","Ghost of Yotei Edition","Spider-Man 2 Edition", "30th Anniversary Edition""],
+ {cat:"Tech",name:"Xbox Series S",price:260,stock:4},
+ {cat:"Tech",name:"Xbox Series X",price:300,stock:6},
+{cat:"Hoodies",name:"Bape Hoodie",price:240,stock:5,
  sizes:["S","M","L","XL"],
  colors:["Black","Pink","Camo"]
 },
-{cat:"Coats",name:"Moncler Coat",price:480,stock:5,
+{cat:"Coats",name:"Moncler Maya Coat",price:210,stock:6,
  sizes:["S","M","L"],
  colors:["Black","Navy"]
 },
-{cat:"Accessories",name:"Labubu Figure",price:120,stock:8}
+{cat:"Accessories",name:"Labubu Plushie",price:60,stock:8,
+ colors:["Red","Orange", "Yellow", "Green", "Blue", "Pink", "Purple", "White", "Black", "Coca-Cola"]
 ];
 
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
