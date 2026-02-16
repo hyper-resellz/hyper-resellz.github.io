@@ -361,6 +361,35 @@
   margin: 0 auto 10px auto;
   border-radius: 12px;
 }
+    .shipping-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.shipping-section h3 {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #aaa;
+  margin-bottom: 5px;
+}
+
+.shipping-section input {
+  background: #111;
+  border: 1px solid #333;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  font-family: inherit;
+  transition: 0.2s;
+}
+
+.shipping-section input:focus {
+  border-color: #ff0033;
+  outline: none;
+  box-shadow: 0 0 6px #ff003355;
+}
     
   </style>
 </head>
@@ -383,6 +412,16 @@
   <div class="cart" id="cart">
     <h2>Your Cart</h2>
     <div id="cartItems"></div>
+     <div class="shipping-section">
+    <h3>Shipping Information</h3>
+
+    <input type="text" id="ship-name" placeholder="Full Name">
+    <input type="text" id="ship-address" placeholder="Street Address">
+    <input type="text" id="ship-city" placeholder="City">
+    <input type="text" id="ship-state" placeholder="State / Province">
+    <input type="text" id="ship-zip" placeholder="ZIP / Postal Code">
+    <input type="text" id="ship-country" placeholder="Country (US / Canada)">
+  </div>
 
     <div class="total-line">
       <span>Subtotal</span>
@@ -787,6 +826,20 @@
     /* ================= PAYMENT ================= */
 
     function checkoutPayPal() {
+      
+      let name = document.getElementById("ship-name").value.trim();
+let address = document.getElementById("ship-address").value.trim();
+let city = document.getElementById("ship-city").value.trim();
+let state = document.getElementById("ship-state").value.trim();
+let zip = document.getElementById("ship-zip").value.trim();
+let country = document.getElementById("ship-country").value.trim();
+
+if (!name) return alert("Enter full name");
+if (!address) return alert("Enter street address");
+if (!city) return alert("Enter city");
+if (!state) return alert("Enter state / province");
+if (!zip) return alert("Enter ZIP / postal code");
+if (!country) return alert("Enter country (US or Canada)");
       let subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
       if (subtotal === 0) return alert("Cart empty");
 
@@ -802,6 +855,21 @@
     }
 
     function checkoutBitcoin() {
+      
+        // ================= SHIPPING VALIDATION =================
+  let name = document.getElementById("ship-name").value.trim();
+  let address = document.getElementById("ship-address").value.trim();
+  let city = document.getElementById("ship-city").value.trim();
+  let state = document.getElementById("ship-state").value.trim();
+  let zip = document.getElementById("ship-zip").value.trim();
+  let country = document.getElementById("ship-country").value.trim();
+
+  if (!name) return alert("Enter full name");
+  if (!address) return alert("Enter street address");
+  if (!city) return alert("Enter city");
+  if (!state) return alert("Enter state / province");
+  if (!zip) return alert("Enter ZIP / postal code");
+  if (!country) return alert("Enter country (US or Canada)");
       let subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
       if (subtotal === 0) return alert("Cart empty");
 
