@@ -445,6 +445,7 @@
     <input type="text" id="ship-state" placeholder="State / Province">
     <input type="text" id="ship-zip" placeholder="ZIP / Postal Code">
     <input type="text" id="ship-country" placeholder="Country (US / Canada)">
+    <input type="text" id="ship-email" placeholder="Email Address">
   </div>
 
     <div class="total-line">
@@ -1028,6 +1029,7 @@ let city = document.getElementById("ship-city").value.trim();
 let state = document.getElementById("ship-state").value.trim();
 let zip = document.getElementById("ship-zip").value.trim();
 let country = document.getElementById("ship-country").value.trim();
+let email = document.getElementById("ship-email").value.trim();      
 
 if (!name) return alert("Enter full name");
 if (!address) return alert("Enter street address");
@@ -1035,6 +1037,7 @@ if (!city) return alert("Enter city");
 if (!state) return alert("Enter state / province");
 if (!zip) return alert("Enter ZIP / postal code");
 if (!country) return alert("Enter country (US or Canada)");
+if (!email) return alert("Enter email address");
       let subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
       if (subtotal === 0) return alert("Cart empty");
 
@@ -1043,7 +1046,7 @@ if (!country) return alert("Enter country (US or Canada)");
 
       document.getElementById("paymentText").innerText =
         "Send $" + total +
-        " to hyper.resellz@gmail.com via PayPal.\nIncludes 5% shipping fee.";
+        " to hyper.resellz@gmail.com via PayPal.\nIncludes 5% shipping fee. Once payment is received, you will get an email with shipping details.";
 
       document.getElementById("overlay").classList.add("active");
       document.getElementById("popup").classList.add("active");
@@ -1058,6 +1061,7 @@ if (!country) return alert("Enter country (US or Canada)");
   let state = document.getElementById("ship-state").value.trim();
   let zip = document.getElementById("ship-zip").value.trim();
   let country = document.getElementById("ship-country").value.trim();
+  let email = document.getElementById("ship-email").value.trim();
 
   if (!name) return alert("Enter full name");
   if (!address) return alert("Enter street address");
@@ -1065,6 +1069,7 @@ if (!country) return alert("Enter country (US or Canada)");
   if (!state) return alert("Enter state / province");
   if (!zip) return alert("Enter ZIP / postal code");
   if (!country) return alert("Enter country (US or Canada)");
+  if (!email) return alert("Enter email address");
       let subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
       if (subtotal === 0) return alert("Cart empty");
 
@@ -1073,7 +1078,7 @@ if (!country) return alert("Enter country (US or Canada)");
 
       document.getElementById("paymentText").innerText =
         "Send $" + total +
-        " worth of BTC to:\n\nbc1qkf4lyr6fyck7zrwur92vwetj2gjesxg20dy3d4\n\nBitcoin Network ONLY.\nIncludes 5% shipping fee.";
+        " worth of BTC to:\n\nbc1qkf4lyr6fyck7zrwur92vwetj2gjesxg20dy3d4\n\nBitcoin Network ONLY.\nIncludes 5% shipping fee. Once payment is received, you will get an email with shipping details.";
 
       document.getElementById("overlay").classList.add("active");
       document.getElementById("popup").classList.add("active");
