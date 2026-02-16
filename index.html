@@ -143,6 +143,18 @@
   gap: 30px;
 }
 
+@media (max-width: 1200px) {
+  .products {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
     .card {
       background: #111;
       border: 1px solid #222;
