@@ -1028,32 +1028,9 @@ document.getElementById("cart").prepend(closeBtn);
 
     /* ================= PAYMENT ================= */
 
-    function checkoutPayPal() {
-      
-      let name = document.getElementById("ship-name").value.trim();
-let address = document.getElementById("ship-address").value.trim();
-let city = document.getElementById("ship-city").value.trim();
-let state = document.getElementById("ship-state").value.trim();
-let zip = document.getElementById("ship-zip").value.trim();
-let country = document.getElementById("ship-country").value.trim();
-let email = document.getElementById("ship-email").value.trim();      
+    /* ================= EMAIL FUNCTION (GLOBAL) ================= */
 
-if (!name) return alert("Enter full name");
-if (!address) return alert("Enter street address");
-if (!city) return alert("Enter city");
-if (!state) return alert("Enter state / province");
-if (!zip) return alert("Enter ZIP / postal code");
-if (!country) return alert("Enter country (US or Canada)");
-if (!email) return alert("Enter email address");
-      let subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-      if (subtotal === 0) return alert("Cart empty");
-
-      let shipping = subtotal * 0.05;
-      let total = (subtotal + shipping).toFixed(2);
-
-      sendOrderEmail(name, address, city, state, zip, country, email, cart, total);
-      
-      function sendOrderEmail(name, address, city, state, zip, country, email, cart, total) {
+function sendOrderEmail(name, address, city, state, zip, country, email, cart, total) {
 
   let itemsText = cart.map(item =>
     `${item.name} x${item.qty}
@@ -1063,7 +1040,7 @@ ${item.variant ? "Variant: " + item.variant : ""}
 ----------------------`
   ).join("\n");
 
-  emailjs.send("service_1zz9oof", "template_8uitfph", {
+  return emailjs.send("service_1zz9oof", "template_8uitfph", {
     customer_name: name,
     customer_email: email,
     address: address,
@@ -1073,26 +1050,15 @@ ${item.variant ? "Variant: " + item.variant : ""}
     country: country,
     items: itemsText,
     total: "$" + total
-  })
-  .then(() => {
-    console.log("Order email sent");
-  })
-  .catch(err => {
-    console.error("Email failed:", err);
   });
 }
 
-      document.getElementById("paymentText").innerText =
-        "Send $" + total +
-        " to hyper.resellz@gmail.com via PayPal.\nIncludes 5% shipping fee. Once payment is received, you will get an email with shipping details.";
 
-      document.getElementById("overlay").classList.add("active");
-      document.getElementById("popup").classList.add("active");
-    }
+/* ================= PAYPAL ================= */
 
-    function checkoutBitcoin() {
-      
-        // ================= SHIPPING VALIDATION =================
+function checkoutPayPal() {
+
+  // Shipping info
   let name = document.getElementById("ship-name").value.trim();
   let address = document.getElementById("ship-address").value.trim();
   let city = document.getElementById("ship-city").value.trim();
@@ -1108,48 +1074,65 @@ ${item.variant ? "Variant: " + item.variant : ""}
   if (!zip) return alert("Enter ZIP / postal code");
   if (!country) return alert("Enter country (US or Canada)");
   if (!email) return alert("Enter email address");
-      let subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-      if (subtotal === 0) return alert("Cart empty");
 
-      let shipping = subtotal * 0.05;
-      let total = (subtotal + shipping).toFixed(2);
+  let subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  if (subtotal === 0) return alert("Cart empty");
 
-      sendOrderEmail(name, address, city, state, zip, country, email, cart, total);
+  let shipping = subtotal * 0.05;
+  let total = (subtotal + shipping).toFixed(2);
 
-      let itemsText = cart.map(item =>
-    `${item.name} x${item.qty}
-${item.size ? "Size: " + item.size : ""}
-${item.color ? "Color: " + item.color : ""}
-${item.variant ? "Variant: " + item.variant : ""}
-----------------------`
-  ).join("\n");
+  sendOrderEmail(name, address, city, state, zip, country, email, cart, total)
+    .then(() => console.log("Order email sent"))
+    .catch(err => console.error("Email failed:", err));
 
-  emailjs.send("service_1zz9oof", "template_8uitfph", {
-    customer_name: name,
-    customer_email: email,
-    address: address,
-    city: city,
-    state: state,
-    zip: zip,
-    country: country,
-    items: itemsText,
-    total: "$" + total
-  })
-  .then(() => {
-    console.log("Order email sent");
-  })
-  .catch(err => {
-    console.error("Email failed:", err);
-  });
+  document.getElementById("paymentText").innerText =
+    "Send $" + total +
+    " to hyper.resellz@gmail.com via PayPal.\nIncludes 5% shipping fee. Once payment is received, you will get an email with shipping details.";
+
+  document.getElementById("overlay").classList.add("active");
+  document.getElementById("popup").classList.add("active");
 }
 
-      document.getElementById("paymentText").innerText =
-        "Send $" + total +
-        " worth of BTC to:\n\nbc1qkf4lyr6fyck7zrwur92vwetj2gjesxg20dy3d4\n\nBitcoin Network ONLY.\nIncludes 5% shipping fee. Once payment is received, you will get an email with shipping details.";
 
-      document.getElementById("overlay").classList.add("active");
-      document.getElementById("popup").classList.add("active");
-    }
+/* ================= BITCOIN ================= */
+
+function checkoutBitcoin() {
+
+  // Shipping info
+  let name = document.getElementById("ship-name").value.trim();
+  let address = document.getElementById("ship-address").value.trim();
+  let city = document.getElementById("ship-city").value.trim();
+  let state = document.getElementById("ship-state").value.trim();
+  let zip = document.getElementById("ship-zip").value.trim();
+  let country = document.getElementById("ship-country").value.trim();
+  let email = document.getElementById("ship-email").value.trim();
+
+  if (!name) return alert("Enter full name");
+  if (!address) return alert("Enter street address");
+  if (!city) return alert("Enter city");
+  if (!state) return alert("Enter state / province");
+  if (!zip) return alert("Enter ZIP / postal code");
+  if (!country) return alert("Enter country (US or Canada)");
+  if (!email) return alert("Enter email address");
+
+  let subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  if (subtotal === 0) return alert("Cart empty");
+
+  let shipping = subtotal * 0.05;
+  let total = (subtotal + shipping).toFixed(2);
+
+  sendOrderEmail(name, address, city, state, zip, country, email, cart, total)
+    .then(() => console.log("Order email sent"))
+    .catch(err => console.error("Email failed:", err));
+
+  document.getElementById("paymentText").innerText =
+    "Send $" + total +
+    " worth of BTC to:\n\nbc1qkf4lyr6fyck7zrwur92vwetj2gjesxg20dy3d4\n\nBitcoin Network ONLY.\nIncludes 5% shipping fee. Once payment is received, you will get an email with shipping details.";
+
+  document.getElementById("overlay").classList.add("active");
+  document.getElementById("popup").classList.add("active");
+}
+
 
     /* ================= FAKE STOCK ================= */
     setInterval(() => {
