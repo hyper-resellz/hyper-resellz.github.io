@@ -10,6 +10,13 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap"
     rel="stylesheet"
   />
+  
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("wO9tDP1brgBeWa9hz");
+  })();
+</script>
 
   <style>
     /* ================= GLOBAL ================= */
@@ -1044,6 +1051,37 @@ if (!email) return alert("Enter email address");
       let shipping = subtotal * 0.05;
       let total = (subtotal + shipping).toFixed(2);
 
+      sendOrderEmail(name, address, city, state, zip, country, email, cart, total);
+      
+      function sendOrderEmail(name, address, city, state, zip, country, email, cart, total) {
+
+  let itemsText = cart.map(item =>
+    `${item.name} x${item.qty}
+${item.size ? "Size: " + item.size : ""}
+${item.color ? "Color: " + item.color : ""}
+${item.variant ? "Variant: " + item.variant : ""}
+----------------------`
+  ).join("\n");
+
+  emailjs.send("service_1zz9oof", "template_8uitfph", {
+    customer_name: name,
+    customer_email: email,
+    address: address,
+    city: city,
+    state: state,
+    zip: zip,
+    country: country,
+    items: itemsText,
+    total: "$" + total
+  })
+  .then(() => {
+    console.log("Order email sent");
+  })
+  .catch(err => {
+    console.error("Email failed:", err);
+  });
+}
+
       document.getElementById("paymentText").innerText =
         "Send $" + total +
         " to hyper.resellz@gmail.com via PayPal.\nIncludes 5% shipping fee. Once payment is received, you will get an email with shipping details.";
@@ -1075,6 +1113,35 @@ if (!email) return alert("Enter email address");
 
       let shipping = subtotal * 0.05;
       let total = (subtotal + shipping).toFixed(2);
+
+      sendOrderEmail(name, address, city, state, zip, country, email, cart, total);
+
+      let itemsText = cart.map(item =>
+    `${item.name} x${item.qty}
+${item.size ? "Size: " + item.size : ""}
+${item.color ? "Color: " + item.color : ""}
+${item.variant ? "Variant: " + item.variant : ""}
+----------------------`
+  ).join("\n");
+
+  emailjs.send("service_1zz9oof", "template_8uitfph", {
+    customer_name: name,
+    customer_email: email,
+    address: address,
+    city: city,
+    state: state,
+    zip: zip,
+    country: country,
+    items: itemsText,
+    total: "$" + total
+  })
+  .then(() => {
+    console.log("Order email sent");
+  })
+  .catch(err => {
+    console.error("Email failed:", err);
+  });
+}
 
       document.getElementById("paymentText").innerText =
         "Send $" + total +
