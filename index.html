@@ -5,11 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HYPER RESELLZ</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-body{background:#0a0a0f;color:white;overflow-x:hidden;}
+body{
+background:#0a0a0f;
+color:white;
+overflow-x:hidden;
+position:relative;
+}
 
-/* TOP SHIPPING BAR */
+/* GRUNGE OVERLAY */
+body::after{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background-image:url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+opacity:.05;
+pointer-events:none;
+z-index:0;
+}
+
+/* TOP BAR */
 .top-bar{
 background:#ff0033;
 text-align:center;
@@ -17,41 +35,6 @@ padding:6px;
 font-size:12px;
 font-weight:600;
 letter-spacing:1px;
-}
-
-/* GLITCH LOGO */
-.logo{
-font-weight:900;
-font-size:24px;
-letter-spacing:4px;
-position:relative;
-display:inline-block;
-animation:glitch 2s infinite;
-}
-.logo::before,.logo::after{
-content:"HYPER RESELLZ";
-position:absolute;
-left:0;top:0;
-}
-.logo::before{color:#ff0033;animation:glitchTop 2s infinite;}
-.logo::after{color:#00f0ff;animation:glitchBottom 2s infinite;}
-
-@keyframes glitch{
-0%,100%{transform:none;}
-20%{transform:skew(-2deg);}
-40%{transform:skew(2deg);}
-60%{transform:translateX(-2px);}
-80%{transform:translateX(2px);}
-}
-@keyframes glitchTop{
-0%{clip-path:inset(0 0 80% 0);}
-50%{clip-path:inset(0 0 60% 0);}
-100%{clip-path:inset(0 0 80% 0);}
-}
-@keyframes glitchBottom{
-0%{clip-path:inset(80% 0 0 0);}
-50%{clip-path:inset(60% 0 0 0);}
-100%{clip-path:inset(80% 0 0 0);}
 }
 
 /* HEADER */
@@ -67,6 +50,28 @@ background:#0a0a0f;
 z-index:1000;
 }
 
+/* GLITCH LOGO */
+.logo{
+font-weight:900;
+font-size:24px;
+letter-spacing:4px;
+position:relative;
+animation:glitch 2s infinite;
+cursor:pointer;
+}
+.logo:hover{
+animation:glitch .3s infinite;
+}
+
+@keyframes glitch{
+0%,100%{transform:none;}
+20%{transform:skew(-2deg);}
+40%{transform:skew(2deg);}
+60%{transform:translateX(-2px);}
+80%{transform:translateX(2px);}
+}
+
+/* CART ICON */
 .cart-icon{cursor:pointer;position:relative;}
 .cart-count{
 position:absolute;
@@ -79,17 +84,24 @@ font-size:12px;
 
 /* CATEGORY */
 .categories{
-display:flex;flex-wrap:wrap;
-gap:10px;padding:20px 6%;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+padding:20px 6%;
 }
 .categories button{
-background:#111;border:1px solid #222;
-color:white;padding:8px 14px;
-border-radius:20px;cursor:pointer;
-font-size:13px;transition:.2s;
+background:#111;
+border:1px solid #222;
+color:white;
+padding:8px 14px;
+border-radius:20px;
+cursor:pointer;
+font-size:13px;
+transition:.2s;
 }
 .categories button.active{
-background:#ff0033;border:none;
+background:#ff0033;
+border:none;
 }
 
 /* PRODUCTS */
@@ -98,23 +110,60 @@ padding:30px 6%;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:30px;
+position:relative;
+z-index:2;
 }
 
 .card{
-background:#111;border:1px solid #222;
-border-radius:18px;padding:18px;
+background:#111;
+border:1px solid #222;
+border-radius:18px;
+padding:18px;
 transition:.3s;
+position:relative;
+overflow:hidden;
 }
-.card:hover{transform:translateY(-5px);border-color:#333;}
 
-.card button:active{
-transform:scale(.92);
-box-shadow:0 0 15px #ff0033;
+.card:hover{
+transform:translateY(-6px);
+border-color:#444;
+box-shadow:0 0 25px #ff003322;
+}
+
+/* IMAGE */
+.card img{
+width:200px;
+height:200px;
+object-fit:cover;
+display:block;
+margin:0 auto 10px auto;
+border-radius:10px;
+}
+
+/* VIEWING COUNTER */
+.viewing{
+font-size:11px;
+color:#00ffcc;
+margin-bottom:6px;
 }
 
 .price{margin:6px 0;font-weight:600;}
-.stock{font-size:12px;margin-bottom:8px;}
-.low{color:#ff0033;font-weight:700;}
+
+.stock{
+font-size:12px;
+margin-bottom:6px;
+}
+
+.low{
+color:#ff0033;
+animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+0%{opacity:1;}
+50%{opacity:.5;}
+100%{opacity:1;}
+}
 
 .qty{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
 .qty button{
@@ -125,71 +174,75 @@ cursor:pointer;
 }
 
 .add-btn{
-width:100%;padding:8px;
-border:none;background:white;
-color:black;border-radius:20px;
-font-weight:700;cursor:pointer;
+width:100%;
+padding:8px;
+border:none;
+background:white;
+color:black;
+border-radius:20px;
+font-weight:700;
+cursor:pointer;
 transition:.2s;
 }
-.add-btn:hover{opacity:.85;}
+
+.add-btn:active{
+transform:scale(.92);
+box-shadow:0 0 20px #ff0033;
+}
 
 /* CART */
 .cart{
-position:fixed;right:-400px;top:0;
-width:350px;height:100%;
-background:#111;padding:20px;
-transition:.4s;overflow-y:auto;
-border-left:1px solid #222;z-index:2000;
+position:fixed;
+right:-400px;
+top:0;
+width:350px;
+height:100%;
+background:#111;
+padding:20px;
+transition:.4s;
+overflow-y:auto;
+border-left:1px solid #222;
+z-index:2000;
 }
 .cart.active{right:0;}
 
 .cart-item{
-display:flex;justify-content:space-between;
-font-size:13px;margin-bottom:10px;
+display:flex;
+justify-content:space-between;
+font-size:13px;
+margin-bottom:10px;
 }
+
 .remove-btn{
-background:none;border:none;
-color:#ff0033;cursor:pointer;
+background:none;
+border:none;
+color:#ff0033;
+cursor:pointer;
 font-size:12px;
 }
+
 .total-line{
-display:flex;justify-content:space-between;
-margin-top:8px;font-size:13px;
+display:flex;
+justify-content:space-between;
+margin-top:8px;
+font-size:13px;
 }
+
 .total{margin-top:15px;font-weight:700;}
 
 .checkout{
-margin-top:15px;width:100%;
-padding:10px;border:none;
-background:#ff0033;color:white;
-border-radius:20px;font-weight:700;
+margin-top:15px;
+width:100%;
+padding:10px;
+border:none;
+background:#ff0033;
+color:white;
+border-radius:20px;
+font-weight:700;
 cursor:pointer;
 }
 
-/* POPUP */
-.overlay{
-position:fixed;width:100%;height:100%;
-background:rgba(0,0,0,.7);
-display:none;z-index:2500;
-}
-.popup{
-position:fixed;top:50%;left:50%;
-transform:translate(-50%,-50%);
-background:#15151c;padding:25px;
-border-radius:18px;border:1px solid #333;
-display:none;text-align:center;
-z-index:3000;
-}
-.popup.active,.overlay.active{display:block;}
-
-.sold-alert{
-position:fixed;bottom:20px;left:20px;
-background:#15151c;padding:12px 18px;
-border-radius:12px;border:1px solid #333;
-font-size:13px;display:none;
-}
-
-/* Styled Dropdowns */
+/* Dropdown */
 select{
 width:100%;
 margin-top:10px;
@@ -200,35 +253,21 @@ border:1px solid #333;
 border-radius:6px;
 font-size:14px;
 cursor:pointer;
-transition:all .25s ease;
-appearance:none;
--webkit-appearance:none;
--moz-appearance:none;
 }
 
-select:hover{
-border-color:#666;
-background:#1a1a1a;
+/* SOLD ALERT */
+.sold-alert{
+position:fixed;
+bottom:20px;
+left:20px;
+background:#15151c;
+padding:12px 18px;
+border-radius:12px;
+border:1px solid #333;
+font-size:13px;
+display:none;
+z-index:3000;
 }
-
-select:focus{
-outline:none;
-border-color:#00ffcc;
-box-shadow:0 0 8px #00ffcc55;
-}
-
-/* Custom arrow */
-select{
-background-image:
-linear-gradient(45deg, transparent 50%, #00ffcc 50%),
-linear-gradient(135deg, #00ffcc 50%, transparent 50%);
-background-position:
-calc(100% - 18px) calc(50% - 3px),
-calc(100% - 12px) calc(50% - 3px);
-background-size:6px 6px;
-background-repeat:no-repeat;
-}
-
 </style>
 </head>
 <body>
@@ -253,75 +292,31 @@ background-repeat:no-repeat;
 <div class="total-line"><span>Shipping (5%)</span><span id="shipping">$0</span></div>
 <div class="total total-line"><span>Total</span><span id="grandTotal">$0</span></div>
 
-<!-- Payment buttons -->
 <button class="checkout" onclick="checkoutPayPal()">PAY VIA PAYPAL</button>
 <button class="checkout" style="background:#f7931a;" onclick="checkoutBitcoin()">PAY VIA BITCOIN</button>
-</div>
-
-<div class="overlay" id="overlay" onclick="closePopup()"></div>
-<div class="popup" id="popup">
-<h2>Payment Instructions</h2>
-<p id="paymentText"></p><br>
-<button onclick="closePopup()">Close</button>
 </div>
 
 <div class="sold-alert" id="soldAlert"></div>
 
 <script>
 
-let products = [
+let products=[
 {
-  cat:"Tech",
-  name:"PS5 (825GB)",
-  price:300,
-  stock:3,
-  variants:[
-    "PS5 Slim (Disc Only)",
-    "PS5 Pro (2TB)",
-    "Ghost of Yotei Edition",
-    "Spider-Man 2 Edition",
-    "30th Anniversary Edition"
-  ]
+cat:"Tech",
+name:"PS5 (825GB)",
+price:300,
+stock:3,
+img:"https://m.media-amazon.com/images/I/619BkvKW35L.jpg",
+variants:["Slim Disc","Pro 2TB","Spider-Man Edition"]
 },
-
 {
-  cat:"Tech",
-  name:"Xbox Series S",
-  price:260,
-  stock:4
-},
-
-{
-  cat:"Tech",
-  name:"Xbox Series X",
-  price:300,
-  stock:6
-},
-
-{
-  cat:"Hoodies",
-  name:"Bape Hoodie",
-  price:240,
-  stock:5,
-  sizes:["S","M","L","XL"],
-  colors:["Black","Pink","Camo"]
-},
-
-{
-  cat:"Coats",
-  name:"Moncler Maya Coat",
-  price:210,
-  stock:6,
-  sizes:["S","M","L"],
-  colors:["Black","Navy"]
-},
-
-{
-  cat:"Accessories",
-  name:"Labubu Plushie",
-  price:60,
-  stock:8,
-  colors:["Red","Orange","Yellow","Green","Blue","Pink","Purple","White","Black","Coca-Cola"]
+cat:"Hoodies",
+name:"Bape Hoodie",
+price:240,
+stock:5,
+img:"https://i.imgur.com/Vf1Y5kF.jpg",
+sizes:["S","M","L","XL"],
+colors:["Black","Pink","Camo"]
 }
 ];
 
@@ -352,38 +347,44 @@ container.innerHTML="";
 list.forEach(p=>{
 quantities[p.name]=1;
 
-let sizeDropdown="";
-let colorDropdown="";
+let sizeDrop="",colorDrop="",variantDrop="";
 
 if(p.sizes){
-sizeDropdown=`<select id="size-${p.name}">
+sizeDrop=`<select id="size-${p.name}">
 <option value="">Select Size</option>
 ${p.sizes.map(s=>`<option value="${s}">${s}</option>`).join("")}
 </select>`;
 }
 
 if(p.colors){
-colorDropdown=`<select id="color-${p.name}">
+colorDrop=`<select id="color-${p.name}">
 <option value="">Select Color</option>
 ${p.colors.map(c=>`<option value="${c}">${c}</option>`).join("")}
 </select>`;
 }
 
+if(p.variants){
+variantDrop=`<select id="variant-${p.name}">
+<option value="">Select Variant</option>
+${p.variants.map(v=>`<option value="${v}">${v}</option>`).join("")}
+</select>`;
+}
+
 container.innerHTML+=`
 <div class="card">
+<img src="${p.img}">
+<div class="viewing">${Math.floor(Math.random()*18)+3} people viewing</div>
 <h3>${p.name}</h3>
 <div class="price">$${p.price}</div>
-<div class="stock" id="stock-${p.name}">${p.stock} LEFT</div>
-
-${sizeDropdown}
-${colorDropdown}
-
+<div class="stock ${p.stock<4?'low':''}" id="stock-${p.name}">${p.stock} LEFT</div>
+${variantDrop}
+${sizeDrop}
+${colorDrop}
 <div class="qty">
 <button onclick="changeQty('${p.name}',-1)">-</button>
 <span id="qty-${p.name}">1</span>
 <button onclick="changeQty('${p.name}',1)">+</button>
 </div>
-
 <button class="add-btn" onclick="addToCart('${p.name}')">ADD</button>
 </div>`;
 });
@@ -399,29 +400,21 @@ function addToCart(name){
 let product=products.find(p=>p.name===name);
 let qty=quantities[name];
 
-let sizeEl=document.getElementById("size-"+name);
-let colorEl=document.getElementById("color-"+name);
+let size=document.getElementById("size-"+name)?.value||null;
+let color=document.getElementById("color-"+name)?.value||null;
+let variant=document.getElementById("variant-"+name)?.value||null;
 
-let size=sizeEl?sizeEl.value:null;
-let color=colorEl?colorEl.value:null;
+if(document.getElementById("size-"+name)&&!size) return alert("Select size");
+if(document.getElementById("color-"+name)&&!color) return alert("Select color");
+if(document.getElementById("variant-"+name)&&!variant) return alert("Select variant");
 
-if(sizeEl && !size) return alert("Select size");
-if(colorEl && !color) return alert("Select color");
-
-cart.push({
-name:name,
-price:product.price,
-qty:qty,
-size:size,
-color:color
-});
-
+cart.push({name,price:product.price,qty,size,color,variant});
 localStorage.setItem("cart",JSON.stringify(cart));
 updateCart();
 }
 
-function removeItem(index){
-cart.splice(index,1);
+function removeItem(i){
+cart.splice(i,1);
 localStorage.setItem("cart",JSON.stringify(cart));
 updateCart();
 }
@@ -437,66 +430,24 @@ count+=item.qty;
 
 items.innerHTML+=`
 <div class="cart-item">
-<span>
-${item.name} x${item.qty}
+<span>${item.name} x${item.qty}
 ${item.size?`<br>Size: ${item.size}`:""}
 ${item.color?`<br>Color: ${item.color}`:""}
+${item.variant?`<br>Variant: ${item.variant}`:""}
 </span>
-<span>
-$${item.price*item.qty}
+<span>$${item.price*item.qty}
 <button class="remove-btn" onclick="removeItem(${i})">remove</button>
 </span>
 </div>`;
 });
 
-let shipping=(subtotal*0.05).toFixed(2);
-let total=(subtotal+parseFloat(shipping)).toFixed(2);
+let shipping=subtotal*0.05;
+let total=subtotal+shipping;
 
 document.getElementById("subtotal").innerText="$"+subtotal.toFixed(2);
-document.getElementById("shipping").innerText="$"+shipping;
-document.getElementById("grandTotal").innerText="$"+total;
+document.getElementById("shipping").innerText="$"+shipping.toFixed(2);
+document.getElementById("grandTotal").innerText="$"+total.toFixed(2);
 document.getElementById("cartCount").innerText=count;
-}
-
-function toggleCart(){
-document.getElementById("cart").classList.toggle("active");
-}
-
-function closePopup(){
-document.getElementById("overlay").classList.remove("active");
-document.getElementById("popup").classList.remove("active");
-}
-
-/* Close Cart Button */
-let closeBtn=document.createElement("button");
-closeBtn.innerText="Close";
-closeBtn.style.marginBottom="15px";
-closeBtn.onclick=toggleCart;
-document.getElementById("cart").prepend(closeBtn);
-
-/* Payment Functions */
-function checkoutPayPal(){
-let subtotal=cart.reduce((sum,i)=>sum+i.price*i.qty,0);
-if(subtotal===0) return alert("Cart empty");
-let shipping=subtotal*0.05;
-let total=(subtotal+shipping).toFixed(2);
-
-document.getElementById("paymentText").innerText=
-"Send $"+total+" to your@email.com via PayPal.\nIncludes 5% shipping fee.";
-document.getElementById("overlay").classList.add("active");
-document.getElementById("popup").classList.add("active");
-}
-
-function checkoutBitcoin(){
-let subtotal=cart.reduce((sum,i)=>sum+i.price*i.qty,0);
-if(subtotal===0) return alert("Cart empty");
-let shipping=subtotal*0.05;
-let total=(subtotal+shipping).toFixed(2);
-
-document.getElementById("paymentText").innerText=
-"Send $" + total + " worth of BTC to:\n\nbc1qkf4lyr6fyck7zrwur92vwetj2gjesxg20dy3d4\n\nBitcoin Network ONLY.\nIncludes 5% shipping fee.";
-document.getElementById("overlay").classList.add("active");
-document.getElementById("popup").classList.add("active");
 }
 
 /* Fake stock fluctuation */
@@ -513,7 +464,7 @@ else el.classList.remove("low");
 });
 },5000);
 
-/* Just sold popup */
+/* Just sold alert */
 setInterval(()=>{
 let random=products[Math.floor(Math.random()*products.length)];
 let alertBox=document.getElementById("soldAlert");
@@ -522,8 +473,11 @@ alertBox.style.display="block";
 setTimeout(()=>alertBox.style.display="none",3000);
 },8000);
 
-init();
+function toggleCart(){
+document.getElementById("cart").classList.toggle("active");
+}
 
+init();
 </script>
 </body>
 </html>
