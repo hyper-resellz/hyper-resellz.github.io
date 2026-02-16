@@ -341,6 +341,15 @@
       border-color: #00ffcc;
       box-shadow: 0 0 8px #00ffcc55;
     }
+    .product-img {
+  width: 125px;
+  height: 125px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 10px auto;
+  border-radius: 12px;
+}
+    
   </style>
 </head>
 
@@ -412,6 +421,7 @@
         name: "PS5 (825GB)",
         price: 300,
         stock: 3,
+        image: "https://exceldisc.com/_next/image?url=https%3A%2F%2Fapiv2.exceldisc.com%2Fmedia%2F47730%2Fconversions%2Fsony-interactive-entertainment-playstation-5-digital-edition-console-slim-preview.jpg&w=256&q=75",
         variants: [
           "PS5 Slim (Disc Only)",
           "PS5 Pro (2TB)",
@@ -542,6 +552,7 @@
 
         container.innerHTML += `
           <div class="card">
+           <img src="${p.image}" class="product-img">
             <h3>${p.name}</h3>
             <div class="price">$${p.price}</div>
             <div class="stock" id="stock-${p.name}">
