@@ -390,7 +390,30 @@
   outline: none;
   box-shadow: 0 0 6px #ff003355;
 }
-    
+    .close-btn {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid #ff0033;
+  color: #ff0033;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.close-btn:hover {
+  background: #ff0033;
+  color: white;
+  box-shadow: 0 0 15px #ff003388;
+}
+
+.close-btn:active {
+  transform: scale(0.95);
+}
+
   </style>
 </head>
 
@@ -457,7 +480,7 @@
     <h2>Payment Instructions</h2>
     <p id="paymentText"></p>
     <br />
-    <button onclick="closePopup()">Close</button>
+    <button class="close-btn" onclick="closePopup()">Close</button>
   </div>
 
   <div class="sold-alert" id="soldAlert"></div>
@@ -816,12 +839,11 @@
       document.getElementById("popup").classList.remove("active");
     }
 
-    /* Close Cart Button */
     let closeBtn = document.createElement("button");
-    closeBtn.innerText = "Close";
-    closeBtn.style.marginBottom = "15px";
-    closeBtn.onclick = toggleCart;
-    document.getElementById("cart").prepend(closeBtn);
+closeBtn.innerText = "Close";
+closeBtn.className = "close-btn";
+closeBtn.onclick = toggleCart;
+document.getElementById("cart").prepend(closeBtn);
 
     /* ================= PAYMENT ================= */
 
